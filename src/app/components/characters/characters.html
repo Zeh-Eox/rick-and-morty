@@ -1,0 +1,56 @@
+<div class="container">
+  <header class="header">
+    <h1 class="title">Rick & Morty Characters</h1>
+    <div class="search-container">
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Rechercher un personnage..."
+        (input)="onSearch($event)"
+      />
+    </div>
+  </header>
+
+  @if (loading()) {
+    <div class="loading">
+      <div class="spinner"></div>
+      <p>Chargement...</p>
+    </div>
+  }
+
+  @if (error()) {
+    <div class="error">
+      <p>{{ error() }}</p>
+    </div>
+  }
+
+  <div class="characters-grid">
+    @for (character of characters(); track character.id) {
+      <div class="character-card" [class.selected]="selectedCharacter()?.id === character.id">
+        <img [src]="character.image" [alt]="character.name" class="character-image" />
+        <div class="character-info">
+          <h3 class="character-name">{{ character.name }}</h3>
+          <div class="character-details">
+            <span class="status-badge" [class]="'status-' + character.status.toLowerCase()">
+              {{ character.status }}
+            </span>
+            <p class="character-species">{{ character.species }}</p>
+          </div>
+          <button class="btn-detail" [routerLink]="['/character', character.id]">
+            Voir le détail
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+
+  @if (characters().length > 0) {
+    <div class="pagination">
+      <button class="btn-page" (click)="prevPage()" [disabled]="currentPage() === 1"><</button>
+      <span class="page-info">Page {{ currentPage() }} / {{ totalPages() }}</span>
+      <button class="btn-page" (click)="nextPage()" [disabled]="currentPage() === totalPages()">
+        >
+      </button>
+    </div>
+  }
+</div>

@@ -1,0 +1,67 @@
+<div class="page-wrapper">
+  <!-- Bouton retour -->
+  <button class="back-btn" (click)="goBack()"><span class="back-arrow">←</span> Retour</button>
+
+  @if (loading()) {
+    <div class="loading">
+      <div class="spinner"></div>
+      <p>Chargement...</p>
+    </div>
+  }
+
+  @if (error()) {
+    <div class="error">
+      <p>{{ error() }}</p>
+    </div>
+  }
+
+  @if (character()) {
+    <div class="detail-container">
+      <div class="modal-content">
+        <img [src]="character()!.image" [alt]="character()!.name" class="modal-image" />
+        <div class="modal-info">
+          <h2 class="modal-title">{{ character()!.name }}</h2>
+
+          <div class="info-group">
+            <label>Status</label>
+            <span class="status-badge" [class]="'status-' + character()!.status.toLowerCase()">
+              {{ character()!.status }}
+            </span>
+          </div>
+
+          <div class="info-group">
+            <label>Genre</label>
+            <span>{{ character()!.gender }}</span>
+          </div>
+
+          <div class="info-group">
+            <label>Espèce</label>
+            <span>{{ character()!.species }}</span>
+          </div>
+
+          @if (character()!.type) {
+            <div class="info-group">
+              <label>Type</label>
+              <span>{{ character()!.type }}</span>
+            </div>
+          }
+
+          <div class="info-group">
+            <label>Origine</label>
+            <span>{{ character()!.origin.name }}</span>
+          </div>
+
+          <div class="info-group">
+            <label>Localisation</label>
+            <span>{{ character()!.location.name }}</span>
+          </div>
+
+          <div class="info-group">
+            <label>Apparitions</label>
+            <span>{{ character()!.episode.length }} épisodes</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>

@@ -1,5 +1,7 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { RouterOutlet, RouterLink } from '@angular/router';
+import { CharacterModel } from './models/character.model';
+import { Characters } from './services/characters.service';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +9,4 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class App {
-  protected readonly title = signal('rick-and-morty');
-}
+export class App {}
