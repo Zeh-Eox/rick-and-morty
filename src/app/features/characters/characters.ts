@@ -1,11 +1,13 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { Characters as CharactersService } from '../../services/characters.service';
 import { CharacterModel } from '../../models/character.model';
-import { RouterLink } from "@angular/router";
+import { LoaderComponent } from '../../shared/loader-component/loader-component';
+import { ErrorComponent } from '../../shared/error-component/error-component';
+import { CharacterCard } from '../../shared/character-card/character-card';
 
 @Component({
   selector: 'app-characters',
-  imports: [RouterLink],
+  imports: [LoaderComponent, ErrorComponent, CharacterCard],
   templateUrl: './characters.html',
   styleUrl: './characters.scss',
 })
@@ -67,17 +69,19 @@ export class Characters implements OnInit {
 
   nextPage(): void {
     if (this.currentPage() < this.totalPages()) {
-      this.currentPage.update(page => page + 1);
+      this.currentPage.update(p => p + 1);
       this.getCharacters();
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   prevPage(): void {
     if (this.currentPage() > 1) {
       this.currentPage.update((p) => p - 1);
       this.getCharacters();
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }

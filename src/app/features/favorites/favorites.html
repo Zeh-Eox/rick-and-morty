@@ -1,0 +1,17 @@
+<div class="container">
+  <header class="header">
+    <h1 class="title">Rick & Morty Personnages Favoris</h1>
+  </header>
+
+  @if (!loading() && favoritesCharacters().length === 0) {
+    <p class="no-character">{{ noFavorites() }}</p>
+  }
+
+  <app-loader-component [isLoading]="loading()" />
+
+  <div class="characters-grid">
+    @for (character of favoritesCharacters(); track character.id) {
+      <app-character-card [character]="character" />
+    }
+  </div>
+</div>

@@ -1,11 +1,10 @@
-import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
-import { RouterOutlet, RouterLink } from '@angular/router';
-import { CharacterModel } from './models/character.model';
-import { Characters } from './services/characters.service';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { Sidebar } from './shared/sidebar/sidebar';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, Sidebar],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

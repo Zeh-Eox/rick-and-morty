@@ -1,0 +1,24 @@
+<div
+  class="character-card"
+  [class.selected]="selectedId === character.id"
+  [class.status-card-alive]="character.status === 'Alive'"
+  [class.status-card-dead]="character.status === 'Dead'"
+  [class.status-card-unknown]="character.status === 'unknown'"
+>
+  <img [src]="character.image" [alt]="character.name" class="character-image" />
+  <div class="character-info">
+    <h3 class="character-name">{{ character.name }}</h3>
+    <div class="character-details">
+      <div class="details">
+        <span class="status-badge" [class]="'status-' + character.status.toLowerCase()">
+          {{ character.status | translate }}
+        </span>
+        <p class="character-species">{{ character.species }}</p>
+      </div>
+      <div class="fav-icon" (click)="toggleFavorite()" [class.filled]="isFavorite()">
+        <lucide-icon [img]="StarIcon" size="20"></lucide-icon>
+      </div>
+    </div>
+    <button class="btn-detail" [routerLink]="['/character', character.id]">Voir le détail</button>
+  </div>
+</div>

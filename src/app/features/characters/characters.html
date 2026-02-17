@@ -1,0 +1,33 @@
+<div class="container">
+  <header class="header">
+    <h1 class="title">Rick & Morty Personnages</h1>
+    <div class="search-container">
+      <input
+        type="text"
+        class="search-input"
+        placeholder="Rechercher un personnage..."
+        (input)="onSearch($event)"
+      />
+    </div>
+  </header>
+
+  <app-loader-component [isLoading]="loading()" />
+
+  <app-error-component [message]="error()" />
+
+  <div class="characters-grid">
+    @for (character of characters(); track character.id) {
+      <app-character-card [character]="character" [selectedId]="selectedCharacter()?.id ?? null" />
+    }
+  </div>
+
+  @if (characters().length > 0) {
+    <div class="pagination">
+      <button class="btn-page" (click)="prevPage()" [disabled]="currentPage() === 1"><</button>
+      <span class="page-info">Page {{ currentPage() }} / {{ totalPages() }}</span>
+      <button class="btn-page" (click)="nextPage()" [disabled]="currentPage() === totalPages()">
+        >
+      </button>
+    </div>
+  }
+</div>
