@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { Characters } from '../../services/characters.service';
+import { CharactersService } from '../../services/characters.service';
 import { CharacterModel } from '../../models/character.model';
 import { ActivatedRoute } from '@angular/router';
 
@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './character-details.scss',
 })
 export class CharacterDetails implements OnInit {
-  private charactersService = inject(Characters);
+  private charactersService = inject(CharactersService);
   private route = inject(ActivatedRoute);
 
   character = signal<CharacterModel['results'][0] | null>(null);

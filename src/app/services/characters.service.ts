@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class Characters {
+export class CharactersService {
   private httpClient = inject(HttpClient);
   private apiUrl = environment.apiUrl;
 

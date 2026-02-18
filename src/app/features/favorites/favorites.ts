@@ -1,6 +1,6 @@
 import { Component, inject, signal, effect } from '@angular/core';
 import { FavoritesService } from '../../services/favorites.service';
-import { Characters } from '../../services/characters.service';
+import { CharactersService } from '../../services/characters.service';
 import { Character } from '../../models/character.model';
 import { LoaderComponent } from '../../shared/loader-component/loader-component';
 import { CharacterCard } from '../../shared/character-card/character-card';
@@ -13,7 +13,7 @@ import { CharacterCard } from '../../shared/character-card/character-card';
 })
 export class Favorites {
   private favoritesService = inject(FavoritesService);
-  private charactersService = inject(Characters);
+  private charactersService = inject(CharactersService);
 
   noFavorites = signal<string>("Aucun Personnage Favori Pour Le Moment.");
 

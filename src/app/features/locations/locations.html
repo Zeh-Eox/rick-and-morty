@@ -1,1 +1,31 @@
-<p>locations works!</p>
+<div class="container">
+  <header class="header">
+    <h1 class="title">Rick & Morty Lieux</h1>
+    <div class="search-container">
+      <!-- <input
+        type="text"
+        class="search-input"
+        placeholder="Rechercher un lieu..."
+        (input)="onSearch($event)"
+      /> -->
+    </div>
+  </header>
+
+  <app-loader-component [isLoading]="loading()" />
+
+  <app-error-component [message]="error()" />
+
+  <div class="locations-grid">
+    @for (location of locations(); track location.id) {
+      <app-location-card [location]="location" />
+    }
+  </div>
+
+  @if (locations().length > 0) {
+    <app-pagination
+      [currentPage]="currentPage()"
+      [totalPages]="totalPages()"
+      (pageChange)="onPageChange($event)"
+    />
+  }
+</div>

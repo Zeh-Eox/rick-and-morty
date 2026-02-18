@@ -1,0 +1,77 @@
+.location-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 181, 204, 0.3);
+    border-color: #00b5cc;
+  }
+
+  &.selected {
+    border-color: #97ce4c;
+    box-shadow: 0 0 30px rgba(151, 206, 76, 0.4);
+  }
+}
+
+.location-header {
+  padding: 1.5rem;
+  background: rgba(0, 181, 204, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.location-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.location-type {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.location-body {
+  padding: 1.5rem;
+}
+
+.location-property {
+  margin-bottom: 1.2rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.4rem;
+  }
+
+  span {
+    display: block;
+    font-size: 1rem;
+    color: #fff;
+  }
+}
+
+.location-dimension {
+  padding: 0.6rem 1rem;
+  background: rgba(151, 206, 76, 0.1);
+  border-left: 3px solid #97ce4c;
+  border-radius: 4px;
+  color: #97ce4c;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
