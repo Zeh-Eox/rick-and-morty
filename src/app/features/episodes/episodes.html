@@ -1,1 +1,63 @@
-<h1>Page en construction...</h1>
+<div class="episodes-container">
+  <header class="page-header">
+    <div class="header-bg"></div>
+    <h1 class="page-title">Épisodes</h1>
+    <p class="page-subtitle">Rick & Morty — Tous les épisodes</p>
+  </header>
+
+  <app-loader-component [isLoading]="loading()" />
+
+  <app-error-component [message]="error()" />
+
+  <!-- Dropdown saisons -->
+  <div class="filter-bar">
+    <div class="filter-label">
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+      </svg>
+      Saison
+    </div>
+    <div class="select-wrapper">
+      <select #seasonSelect (change)="selectSeason(seasonSelect.value)" class="season-select">
+        <option value="">Toutes les saisons</option>
+        <option *ngFor="let s of seasons()" [value]="s">Saison {{ s }}</option>
+      </select>
+      <svg
+        class="select-arrow"
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+      >
+        <polyline points="6 9 12 15 18 9" />
+      </svg>
+    </div>
+    <div class="filter-count">
+      <span class="count-num">{{ allEpisodes().length }}</span>
+      <span class="count-label">épisode{{ allEpisodes().length > 1 ? 's' : '' }}</span>
+    </div>
+  </div>
+
+  <div class="episodes-grid">
+    @for (episode of allEpisodes(); track episode.id) {
+      <app-episode-card [episode]="episode" />
+    }
+  </div>
+
+  @if (!selectedSeason()) {
+    <app-pagination
+      [currentPage]="currentPage()"
+      [totalPages]="totalPages()"
+      (pageChange)="onPageChange($event)"
+    />
+  }
+</div>

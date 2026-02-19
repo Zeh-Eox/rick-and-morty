@@ -1,77 +1,137 @@
-.location-card {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  cursor: pointer;
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600&display=swap');
 
-  &:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 40px rgba(0, 181, 204, 0.3);
-    border-color: #00b5cc;
+:host {
+  display: block;
+}
+
+/* ── CARD ── */
+.location-card {
+  position: relative;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(0, 230, 180, 0.04) 100%);
+  border: 1px solid rgba(0, 230, 180, 0.15);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: default;
+  transition: border-color 0.3s, transform 0.3s;
+  animation: fadeUp 0.4s ease both;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    background: radial-gradient(ellipse at 50% 0%, rgba(0, 230, 180, 0.08) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
   }
 
-  &.selected {
-    border-color: #97ce4c;
-    box-shadow: 0 0 30px rgba(151, 206, 76, 0.4);
+  &:hover {
+    border-color: rgba(0, 230, 180, 0.5);
+    transform: translateY(-4px);
+
+    &::after {
+      opacity: 1;
+    }
+
+    .location-header::before {
+      opacity: 0.6;
+    }
   }
 }
 
+/* ── HEADER ── */
 .location-header {
-  padding: 1.5rem;
-  background: rgba(0, 181, 204, 0.1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  padding: 1.25rem 1.5rem 1rem;
+  border-bottom: 1px solid rgba(0, 230, 180, 0.08);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #00e6b4, #00bfff, #a78bfa);
+    opacity: 0.3;
+    transition: opacity 0.3s;
+  }
 }
 
 .location-name {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: #fff;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #e0f7fa;
+  margin: 0 0 0.4rem;
+  line-height: 1.4;
+  letter-spacing: 0.03em;
 }
 
 .location-type {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.6);
+  display: inline-block;
+  background: rgba(0, 230, 180, 0.12);
+  border: 1px solid rgba(0, 230, 180, 0.3);
+  color: #00e6b4;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  padding: 0.2rem 0.65rem;
+  border-radius: 4px;
+  margin: 0;
 }
 
+/* ── BODY ── */
 .location-body {
-  padding: 1.5rem;
+  padding: 1rem 1.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
 }
 
 .location-property {
-  margin-bottom: 1.2rem;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 
   label {
-    display: block;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.78rem;
+    color: #4dd0e1;
+    opacity: 0.6;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 0.4rem;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    white-space: nowrap;
   }
 
   span {
-    display: block;
-    font-size: 1rem;
-    color: #fff;
+    font-size: 0.9rem;
+    color: #e0f7fa;
+    font-weight: 500;
+    text-align: right;
   }
 }
 
 .location-dimension {
-  padding: 0.6rem 1rem;
-  background: rgba(151, 206, 76, 0.1);
-  border-left: 3px solid #97ce4c;
-  border-radius: 4px;
-  color: #97ce4c;
-  font-size: 0.95rem;
-  font-weight: 500;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.75rem !important;
+  color: #a78bfa !important;
+  letter-spacing: 0.05em;
+}
+
+/* ── ANIMATION ── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

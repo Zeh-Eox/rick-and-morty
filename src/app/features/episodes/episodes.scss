@@ -1,0 +1,280 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600&display=swap');
+
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #050a0f;
+  color: #e0f7fa;
+  font-family: 'Rajdhani', sans-serif;
+  border-radius: 12px;
+}
+
+.episodes-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
+}
+
+/* ── HEADER ── */
+.page-header {
+  position: relative;
+  text-align: center;
+  padding: 4rem 0 3rem;
+  overflow: hidden;
+}
+
+.header-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(0, 230, 180, 0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 30% at 80% 50%, rgba(100, 60, 255, 0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.page-title {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #00e6b4 0%, #00bfff 50%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 0.5rem;
+  position: relative;
+}
+
+.title-icon {
+  -webkit-text-fill-color: initial;
+  margin-right: 0.5rem;
+}
+
+.page-subtitle {
+  font-size: 1rem;
+  color: #4dd0e1;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin: 0;
+  position: relative;
+}
+
+/* ── STATES ── */
+.state-loading,
+.state-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 6rem 0;
+  color: #4dd0e1;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+}
+
+.spinner {
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+
+.orbit {
+  position: absolute;
+  inset: 0;
+  border: 2px solid transparent;
+  border-top-color: #00e6b4;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.orbit--2 {
+  inset: 10px;
+  border-top-color: #a78bfa;
+  animation-duration: 0.7s;
+  animation-direction: reverse;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error-icon {
+  font-size: 2.5rem;
+}
+
+.btn-retry {
+  background: transparent;
+  border: 1px solid #00e6b4;
+  color: #00e6b4;
+  padding: 0.6rem 1.8rem;
+  border-radius: 4px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-retry:hover {
+  background: #00e6b4;
+  color: #050a0f;
+}
+
+/* ── GRID ── */
+.episodes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+/* ── PAGINATION ── */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.page-btn {
+  background: transparent;
+  border: 1px solid rgba(0, 230, 180, 0.3);
+  color: #00e6b4;
+  padding: 0.6rem 1.5rem;
+  border-radius: 6px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.page-btn:hover:not(:disabled) {
+  background: rgba(0, 230, 180, 0.1);
+  border-color: #00e6b4;
+}
+
+.page-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.page-info {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.current-page {
+  color: #00e6b4;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.sep {
+  color: #4dd0e1;
+  opacity: 0.5;
+}
+
+.total-pages {
+  color: #4dd0e1;
+  opacity: 0.6;
+}
+
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 0.85rem 1.25rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(0, 230, 180, 0.12);
+  border-radius: 10px;
+  backdrop-filter: blur(8px);
+}
+
+.filter-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #4dd0e1;
+  opacity: 0.7;
+  white-space: nowrap;
+}
+
+.select-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.season-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: rgba(0, 230, 180, 0.06);
+  border: 1px solid rgba(0, 230, 180, 0.25);
+  border-radius: 6px;
+  color: #00e6b4;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 0.45rem 2.5rem 0.45rem 0.9rem;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.season-select:hover,
+.season-select:focus {
+  border-color: rgba(0, 230, 180, 0.6);
+  background: rgba(0, 230, 180, 0.1);
+}
+
+.season-select option {
+  background: #0d1f2d;
+  color: #e0f7fa;
+}
+
+.select-arrow {
+  position: absolute;
+  right: 0.7rem;
+  color: #00e6b4;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.filter-count {
+  margin-left: auto;
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+
+.count-num {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #00e6b4;
+}
+
+.count-label {
+  font-size: 0.8rem;
+  color: #4dd0e1;
+  opacity: 0.6;
+  letter-spacing: 0.05em;
+}

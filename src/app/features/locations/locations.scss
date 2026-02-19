@@ -1,112 +1,86 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600&display=swap');
+
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #050a0f;
+  color: #e0f7fa;
+  font-family: 'Rajdhani', sans-serif;
+  border-radius: 12px;
 }
 
+/* ── CONTAINER ── */
 .container {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0 1.5rem 4rem;
 }
 
+/* ── HEADER ── */
 .header {
+  position: relative;
   text-align: center;
-  margin-bottom: 3rem;
+  padding: 4rem 0 3rem;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 0%, rgba(0, 230, 180, 0.12) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 30% at 20% 50%, rgba(100, 60, 255, 0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
 }
 
 .title {
-  font-size: 3rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #00b5cc 0%, #97ce4c 100%);
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #00e6b4 0%, #00bfff 50%, #a78bfa 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 2rem;
-  text-shadow: 0 4px 20px rgba(0, 181, 204, 0.3);
+  margin: 0 0 0.5rem;
+  position: relative;
 }
 
 .search-container {
-  max-width: 900px;
-  margin: 0 auto;
-}
+  position: relative;
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
 
-.search-input {
-  width: 100%;
-  padding: 1rem 1.5rem;
-  font-size: 1rem;
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  border-radius: 50px;
-  background: rgba(255, 255, 255, 0.05);
-  color: #fff;
-  transition: all 0.3s ease;
-  outline: none;
+  .search-input {
+    width: 100%;
+    max-width: 480px;
+    background: rgba(0, 230, 180, 0.05);
+    border: 1px solid rgba(0, 230, 180, 0.2);
+    border-radius: 8px;
+    color: #e0f7fa;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem;
+    padding: 0.7rem 1.2rem 0.7rem 2.8rem;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
 
-  &::placeholder {
-    color: rgba(255, 255, 255, 0.5);
-  }
+    &::placeholder {
+      color: rgba(77, 208, 225, 0.4);
+    }
 
-  &:focus {
-    border-color: #00b5cc;
-    background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 0 20px rgba(0, 181, 204, 0.3);
-  }
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
+    &:focus {
+      border-color: rgba(0, 230, 180, 0.5);
+      background: rgba(0, 230, 180, 0.08);
+    }
   }
 }
 
+/* ── GRID ── */
 .locations-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 2rem;
-  margin-bottom: 3rem;
-}
-
-.pagination {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
-  margin-top: 3rem;
-  padding: 2rem 0;
-}
-
-.btn-page {
-  padding: 0.8rem 2rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-
-  &:hover:not(:disabled) {
-    background: linear-gradient(135deg, #00b5cc 0%, #0088a3 100%);
-    border-color: #00b5cc;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0, 181, 204, 0.4);
-  }
-
-  &:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-  }
-
-  &:active:not(:disabled) {
-    transform: translateY(0);
-  }
-}
-
-.page-info {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.9);
-  min-width: 150px;
-  text-align: center;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem;
 }
