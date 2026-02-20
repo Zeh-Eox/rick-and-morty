@@ -2,6 +2,18 @@
   <header class="header">
     <h1 class="title">Rick & Morty Personnages</h1>
     <div class="search-container">
+      <svg
+        class="search-icon"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <circle cx="11" cy="11" r="8" />
+        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+      </svg>
       <input
         type="text"
         class="search-input"
@@ -11,8 +23,103 @@
     </div>
   </header>
 
-  <app-loader-component [isLoading]="loading()" />
+  <!-- Filter Bar -->
+  <div class="filter-bar">
+    <div class="filter-label">
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+      </svg>
+      Filtres
+    </div>
 
+    <div class="select-wrapper">
+      <select #statusSelect (change)="setFilter('status', statusSelect.value)">
+        <option value="">Statut</option>
+        <option value="alive">Vivant</option>
+        <option value="dead">Mort</option>
+        <option value="unknown">Inconnu</option>
+      </select>
+      <svg
+        class="select-arrow"
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+      >
+        <polyline points="6 9 12 15 18 9" />
+      </svg>
+    </div>
+
+    <div class="select-wrapper">
+      <select #genderSelect (change)="setFilter('gender', genderSelect.value)">
+        <option value="">Genre</option>
+        <option value="male">Masculin</option>
+        <option value="female">Féminin</option>
+        <option value="genderless">Sans genre</option>
+        <option value="unknown">Inconnu</option>
+      </select>
+      <svg
+        class="select-arrow"
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+      >
+        <polyline points="6 9 12 15 18 9" />
+      </svg>
+    </div>
+
+    <div class="select-wrapper">
+      <select #speciesSelect (change)="setFilter('species', speciesSelect.value)">
+        <option value="">Espèce</option>
+        <option value="human">Humain</option>
+        <option value="alien">Alien</option>
+        <option value="robot">Robot</option>
+        <option value="animal">Animal</option>
+        <option value="mytholog">Mythologique</option>
+      </select>
+      <svg
+        class="select-arrow"
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+      >
+        <polyline points="6 9 12 15 18 9" />
+      </svg>
+    </div>
+
+    @if (isFilterActive()) {
+      <button
+        class="btn-reset"
+        (click)="
+          resetFilters(); statusSelect.value = ''; genderSelect.value = ''; speciesSelect.value = ''
+        "
+      >
+        ✕ Réinitialiser
+      </button>
+    }
+
+    <div class="filter-count">
+      <span class="count-num">{{ characters().length }}</span>
+      <span class="count-label">personnage{{ characters().length > 1 ? 's' : '' }}</span>
+    </div>
+  </div>
+
+  <app-loader-component [isLoading]="loading()" />
   <app-error-component [message]="error()" />
 
   <div class="characters-grid">
@@ -21,7 +128,7 @@
     }
   </div>
 
-  @if (characters().length > 0) {
+  @if (characters().length > 0 && totalPages() > 1) {
     <app-pagination
       [currentPage]="currentPage()"
       [totalPages]="totalPages()"

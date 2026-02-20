@@ -24,14 +24,12 @@ export class EpisodesService {
   getAllEpisodes(): void {
   this.getEpisodes(1).pipe(
     switchMap((res) => {
-      // Seed with page 1 results
       this.allEpisodes.update((list) => [...list, ...res.results]);
 
       const totalPages = res.info.pages;
 
       if (totalPages <= 1) return EMPTY;
 
-      // Build observables for pages 2..N and fetch in parallel
       const pageRequests = Array.from(
         { length: totalPages - 1 },
         (_, i) => this.getEpisodes(i + 2)
@@ -41,7 +39,6 @@ export class EpisodesService {
     })
   ).subscribe({
     next: (responses) => {
-      // responses is an array of results from pages 2..N
       const allResults = responses.flatMap((res) => res.results);
       this.allEpisodes.update((list) => [...list, ...allResults]);
 

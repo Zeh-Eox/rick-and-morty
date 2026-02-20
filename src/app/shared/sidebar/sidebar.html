@@ -1,16 +1,100 @@
-<aside class="sidebar">
-  <h2 class="logo">Page Rick & Morty</h2>
+<!-- Hamburger button (mobile only) -->
+<button class="hamburger" (click)="toggleMenu()" [class.open]="isOpen()">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+
+<!-- Overlay (mobile only) -->
+<div class="overlay" [class.visible]="isOpen()" (click)="closeMenu()"></div>
+
+<!-- Sidebar -->
+<aside class="sidebar" [class.open]="isOpen()">
+  <div class="sidebar-header">
+    <div class="logo-icon">⚛</div>
+    <div class="logo-text">
+      <span class="logo-main">Rick & Morty</span>
+      <span class="logo-sub">Universe</span>
+    </div>
+  </div>
 
   <nav>
-    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-      Personnages
+    <span class="nav-section-label">Navigation</span>
+
+    <a
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      (click)="closeMenu()"
+    >
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+      </svg>
+      <span>Personnages</span>
     </a>
 
-    <a routerLink="/locations" routerLinkActive="active"> Lieux </a>
-    <a routerLink="/episodes" routerLinkActive="active"> Episodes </a>
+    <a routerLink="/locations" routerLinkActive="active" (click)="closeMenu()">
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+        <circle cx="12" cy="10" r="3" />
+      </svg>
+      <span>Lieux</span>
+    </a>
 
-    <hr />
+    <a routerLink="/episodes" routerLinkActive="active" (click)="closeMenu()">
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <polygon points="23 7 16 12 23 17 23 7" />
+        <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
+      </svg>
+      <span>Épisodes</span>
+    </a>
 
-    <a routerLink="/favorites" routerLinkActive="active"> Personnages Favoris </a>
+    <div class="nav-divider"></div>
+    <span class="nav-section-label">Personnel</span>
+
+    <a routerLink="/favorites" routerLinkActive="active" (click)="closeMenu()">
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <polygon
+          points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+        />
+      </svg>
+      <span>Favoris</span>
+    </a>
   </nav>
+
+  <div class="sidebar-footer">
+    <span class="footer-dot"></span>
+    <span class="footer-text">Rick and Morty API</span>
+  </div>
 </aside>

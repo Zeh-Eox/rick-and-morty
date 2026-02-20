@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { Character, CharacterModel } from '../models/character.model';
@@ -11,8 +11,14 @@ export class CharactersService {
   private httpClient = inject(HttpClient);
   private apiUrl = environment.apiUrl;
 
-  getCharacters(page: number = 1) {
-    return this.httpClient.get<CharacterModel>(`${this.apiUrl}/character?page=${page}`);
+  getCharacters(page: number = 1, filters: { status?: string; gender?: string; species?: string; name?: string } = {}) {
+    let params = new HttpParams().set('page', page.toString());
+    
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value) params = params.set(key, value);
+    });
+  
+    return this.httpClient.get<CharacterModel>(`${this.apiUrl}/character`, { params });
   }
 
   getCharacter(id: number) {
